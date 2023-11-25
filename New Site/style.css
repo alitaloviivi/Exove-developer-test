@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+}
+
+.site-header,
+.site-footer,
+.column {
+  padding: 10px;
+  margin: 4px;
+  background-color: #f3f3f3;
+}
+
+.column {
+  float: left;
+  width: calc(33.3% - 8px);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 960px) {
+  .column  {
+    width: calc(50% - 8px);
+  }
+}
+

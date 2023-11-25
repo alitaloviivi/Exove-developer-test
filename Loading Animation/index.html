@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loading Animation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h3>Animation settings</h3>
+        <table class="checkbox-container">
+          <tr>
+            <td><p style="font-size: smaller;">White</p></td>
+            <td><input type="checkbox" id="colorCheckbox" class="switch"></td>
+            <td><p style="font-size: smaller;">Brown</p></td>
+        </tr>
+          <tr>
+            <td><p style="font-size: smaller;">Small</p></td>
+            <td><input type="checkbox" id="sizeCheckbox" class="switch"></td>
+            <td><p style="font-size: smaller;">Big</p></td>
+          </tr>
+          <tr>
+            <td><p style="font-size: smaller;">Slow</p></td>
+            <td><input type="checkbox" id="speedCheckbox" class="switch"></td>
+            <td><p style="font-size: smaller;">Fast</p></td>
+          </tr>
+        </table>
+      </div>
+
+    <div class="container">
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+    </div>
+
+
+    <script>
+        const styles = {
+            colorCheckbox: { style: 'backgroundColor', checkedStyle: 'rgba(11, 10, 11, 0.295)' },
+            sizeCheckbox: { style: ['width', 'height'], checkedStyle: ['25px', '25px'] },
+            speedCheckbox: { style: 'animationDuration', checkedStyle: '0.5s' }
+        };
+
+        const squares = document.querySelectorAll('.container .square');
+    
+        function updateSquareStyles() {
+            squares.forEach(square => {
+                Object.entries(styles).forEach(([id, { style, checkedStyle }]) => {
+                    const checkbox = document.getElementById(id);
+                    if (checkbox.checked) {
+                        if (Array.isArray(style)) {
+                            style.forEach((s, index) => (square.style[s] = checkedStyle[index]));
+                        } else {
+                            square.style[style] = checkedStyle;
+                        }
+                    } else {
+                        if (Array.isArray(style)) {
+                            style.forEach(s => (square.style[s] = ''));
+                        } else {
+                            square.style[style] = '';
+                        }
+                    }
+                });
+            });
+        }
+    
+        Object.keys(styles).forEach(id => {
+            const checkbox = document.getElementById(id);
+            checkbox.addEventListener('change', updateSquareStyles);
+        });
+     
+    </script>
+    
+</body>
+</html>
