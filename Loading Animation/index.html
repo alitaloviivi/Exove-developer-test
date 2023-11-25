@@ -12,17 +12,17 @@
         <table class="checkbox-container">
           <tr>
             <td><p style="font-size: smaller;">White</p></td>
-            <td><input type="checkbox" id="colorCheckbox" class="switch"></td>
+            <td class="toggleswitch"><input type="checkbox" id="colorCheckbox" class="switch"></td>
             <td><p style="font-size: smaller;">Brown</p></td>
         </tr>
           <tr>
             <td><p style="font-size: smaller;">Small</p></td>
-            <td><input type="checkbox" id="sizeCheckbox" class="switch"></td>
+            <td><input type="range" id="sizeSlider" class="slider" min="10" max="50" value="10"></td>
             <td><p style="font-size: smaller;">Big</p></td>
           </tr>
           <tr>
             <td><p style="font-size: smaller;">Slow</p></td>
-            <td><input type="checkbox" id="speedCheckbox" class="switch"></td>
+            <td><input type="range" id="speedSlider" class="slider" min="0.5" max="2" value="1" step="0.1"></td>
             <td><p style="font-size: smaller;">Fast</p></td>
           </tr>
         </table>
@@ -40,40 +40,34 @@
 
 
     <script>
-        const styles = {
-            colorCheckbox: { style: 'backgroundColor', checkedStyle: 'rgba(11, 10, 11, 0.295)' },
-            sizeCheckbox: { style: ['width', 'height'], checkedStyle: ['25px', '25px'] },
-            speedCheckbox: { style: 'animationDuration', checkedStyle: '0.5s' }
-        };
-
-        const squares = document.querySelectorAll('.container .square');
-    
-        function updateSquareStyles() {
+        document.getElementById('sizeSlider').addEventListener('input', function() {
+            const sizeValue = this.value + 'px';
+            const squares = document.querySelectorAll('.square');
             squares.forEach(square => {
-                Object.entries(styles).forEach(([id, { style, checkedStyle }]) => {
-                    const checkbox = document.getElementById(id);
-                    if (checkbox.checked) {
-                        if (Array.isArray(style)) {
-                            style.forEach((s, index) => (square.style[s] = checkedStyle[index]));
-                        } else {
-                            square.style[style] = checkedStyle;
-                        }
-                    } else {
-                        if (Array.isArray(style)) {
-                            style.forEach(s => (square.style[s] = ''));
-                        } else {
-                            square.style[style] = '';
-                        }
-                    }
-                });
+                square.style.width = sizeValue;
+                square.style.height = sizeValue;
             });
-        }
-    
-        Object.keys(styles).forEach(id => {
-            const checkbox = document.getElementById(id);
-            checkbox.addEventListener('change', updateSquareStyles);
         });
-     
+
+        document.getElementById('speedSlider').addEventListener('input', function() {
+            const speedValue = this.value;
+            const normalizedSpeedValue = `${2.5 - speedValue}s`;
+            const squares = document.querySelectorAll('.square');
+            squares.forEach(square => {
+                square.style.animationDuration = normalizedSpeedValue;
+                console.log(normalizedSpeedValue);
+            });
+        });
+
+        const colorCheckbox = document.getElementById('colorCheckbox');
+        colorCheckbox.addEventListener('change', function() {
+            const squares = document.querySelectorAll('.square');
+            if (this.checked) {
+                squares.forEach(square => square.style.backgroundColor = 'rgba(11, 10, 11, 0.6)');
+            } else {
+                squares.forEach(square => square.style.backgroundColor = '#fff');
+            }
+        });
     </script>
     
 </body>

@@ -5,7 +5,7 @@ cd Loading Animation
 start index.html
 or use Visual Studio Code Live Server extension
 
-I chose this question because it is to do with front-end factors. First I planned what I was going to do and decided upon a simple loading animation. This was because I find it to be a better user-experience. Then I began to step by step build the solution, whilst finding ways to implement these steps. Starting with building the animation and then making the switches to change aspects of the animation. I needed to use some JavaScript in order to implement some of the functionalities.
+I chose this question because it is to do with front-end factors. First I planned what I was going to do and decided upon a simple loading animation. This was because I find it to be a better user-experience. Then I began to step by step build the solution, whilst finding ways to implement these steps. Starting with building the animation and then making the switches to change aspects of the animation. I needed to use some JavaScript in order to implement some of the functionalities. I made the basic functionalities first and then came back to make them better. 
 
 **Section 2 Question B**
 The answer to the question is in the file 'connect.sql'.
